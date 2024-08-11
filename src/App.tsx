@@ -1,7 +1,11 @@
+import { GlobalStyle } from "./components/GlobalStyle";
+import { Header } from "./components/Header";
+
 export const App = () => {
   return (
     <>
-      <h1>Rater</h1>
+      <Header />
+      <GlobalStyle />
     </>
   );
 };
