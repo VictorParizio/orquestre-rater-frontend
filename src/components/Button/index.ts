@@ -1,11 +1,16 @@
 import styled from "styled-components";
-import { colors } from "../../theme/colors";
+import { colors } from "src/theme/colors";
 
 export const Button = styled.button`
   border: none;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 0 8px ${colors.primaryBackground};
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(2);
+  }
 `;
 
 export const ButtonLight = styled(Button)`
