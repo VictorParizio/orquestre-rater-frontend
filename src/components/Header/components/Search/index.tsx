@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Button, ButtonDark } from "../../../Button";
-import { Input } from "../../../Input";
-import { colors } from "../../../../theme/colors";
 import { RiSearchLine } from "react-icons/ri";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
+
+import { Button, ButtonDark } from "src/components/Button";
+import { colors } from "src/theme/colors";
+import { Input } from "src/components/Input";
 
 const SearchContainer = styled.div`
   display: flex;

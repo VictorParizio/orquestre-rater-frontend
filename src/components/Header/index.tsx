@@ -1,20 +1,18 @@
 import styled from "styled-components";
-import logo from "../../assets/Logo.svg";
+import logo from "@assets/Logo.svg";
 
-import { colors } from "../../theme/colors";
-import { ButtonDark } from "../Button";
+import { colors } from "src/theme/colors";
 import { Search } from "./components/Search";
+import { ButtonDark } from "../Button";
 
-export const HeaderContainer = styled.header`
+const HeaderContainer = styled.header`
   background-color: ${colors.primaryBackground};
-  width: 144rem;
-  max-width: 100vw;
   padding: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-
+  
   div + button {
     height: 4rem;
     width: 12.8rem;
