@@ -1,14 +1,15 @@
+import { colors } from "src/theme/colors";
 import styled from "styled-components";
-import { colors } from "../../theme/colors";
 
 const BaselInput = styled.input`
   background: ${colors.secondaryBackground};
   width: 31.7rem;
   height: 4.8rem;
-  padding-left: 5.2rem;
+  padding: 0 2rem 0 5.2rem;
   max-width: 100%;
   border: none;
   border-radius: 2.4rem;
+  color: ${colors.primaryText};
 
   &::placeholder {
     color: ${colors.tertiaryInteractive};
