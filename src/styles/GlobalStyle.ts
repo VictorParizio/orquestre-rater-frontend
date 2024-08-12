@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { colors } from "../theme/colors";
+import { colors } from "src/theme/colors";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -7,17 +7,22 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-
+  
   html {
     font-size: 62.5%;
   }
-
+  
   body {
+    background: ${colors.primaryBackground};
     font-family: "Inter", sans-serif;
-    background: ${colors.secondaryBackground};
-    background: white;
-    color: ${colors.primaryText};
     font-size: 1.6rem;
+    color: ${colors.primaryText};
+  }
+  
+  #root {
+    width: 144rem;
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   a {
