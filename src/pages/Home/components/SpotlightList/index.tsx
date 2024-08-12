@@ -14,28 +14,7 @@ const Container = styled.section`
     gap: 12px;
   }
 
-  figure {
-    width: 38rem;
-    height: 25.4rem;
-    position: relative;
 
-    figcaption {
-      position: absolute;
-      top: 0;
-      height: 25.4rem;
-      padding: 12px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    h3 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-  }
 `;
 
 export const SpotlightList = () => {

@@ -7,6 +7,29 @@ import { BtnTrailer } from "src/components/BtnTrailer";
 import { ButtonMedium } from "src/components/Button";
 import { Thumbnail } from "src/components/Thumbnail";
 
+const Card = styled.figure`
+  width: 38rem;
+  height: 25.4rem;
+  position: relative;
+
+  figcaption {
+    position: absolute;
+    top: 0;
+    height: 25.4rem;
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+`;
+
 const RaterInfo = styled.div`
   display: flex;
   align-items: center;
@@ -38,7 +61,7 @@ const Favorite = styled(ButtonMedium)`
   width: 3.2rem;
   padding-top: 2px;
   border-radius: 8px;
-  
+
   &:hover {
     filter: none;
   }
@@ -56,7 +79,7 @@ const Favorite = styled(ButtonMedium)`
 export const MovieCard = () => {
   return (
     <li>
-      <figure>
+      <Card>
         <Thumbnail src={thumbnail} />
         <figcaption>
           <RaterInfo>
@@ -73,7 +96,7 @@ export const MovieCard = () => {
             <BtnTrailer href="" />
           </div>
         </figcaption>
-      </figure>
+      </Card>
     </li>
   );
 };
