@@ -7,15 +7,21 @@ import { BtnTrailer } from "src/components/BtnTrailer";
 import { ButtonMedium } from "src/components/Button";
 import { Thumbnail } from "src/components/Thumbnail";
 
+const ListItem = styled.li`
+  display: flex;
+  flex: 1;
+  min-width: 10rem;
+`;
+
 const Card = styled.figure`
-  width: 38rem;
+  width: 100%;
   height: 25.4rem;
   position: relative;
 
   figcaption {
     position: absolute;
     top: 0;
-    height: 25.4rem;
+    height: 100%;
     padding: 12px;
 
     display: flex;
@@ -28,6 +34,16 @@ const Card = styled.figure`
     font-weight: 700;
     margin-bottom: 12px;
   }
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 `;
 
 const RaterInfo = styled.div`
@@ -78,9 +94,10 @@ const Favorite = styled(ButtonMedium)`
 
 export const MovieCard = () => {
   return (
-    <li>
+    <ListItem>
       <Card>
         <Thumbnail src={thumbnail} />
+        <Overlay />
         <figcaption>
           <RaterInfo>
             <Raters>
@@ -97,6 +114,6 @@ export const MovieCard = () => {
           </div>
         </figcaption>
       </Card>
-    </li>
+    </ListItem>
   );
 };
