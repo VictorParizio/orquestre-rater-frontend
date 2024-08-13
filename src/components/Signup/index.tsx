@@ -1,25 +1,26 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { ModalForm } from "../ModalForm";
-
-const Container = styled.section`
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+import {
+  Blur,
+  CloseModal,
+  Container,
+  CriarConta,
+  Form,
+  FormContainer,
+  ModalContainer,
+  SendButton,
+} from "../../styles/ModalForm";
+import { InputForm } from "../InputForm";
+import { useModalStore } from "src/store/modalStore";
 
 export const Signup: React.FC = () => {
+  const { isSignupOpen, openLogin, closeModals } = useModalStore();
+
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
-  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -33,9 +34,9 @@ export const Signup: React.FC = () => {
     {
       textLabel: "Nome Completo",
       type: "text",
-      name: "name",
+      name: "fullName",
       placeholder: "Digite seu nome",
-      value: formData.name,
+      value: formData.fullName,
       onChange: handleChange,
     },
     {
@@ -55,7 +56,7 @@ export const Signup: React.FC = () => {
       onChange: handleChange,
     },
     {
-      textLabel: "Confirmar Senha",
+      textLabel: "Confirmar senha",
       type: "password",
       name: "confirmPassword",
       placeholder: "Confirme sua senha",
@@ -64,21 +65,30 @@ export const Signup: React.FC = () => {
     },
   ];
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  if (!isSignupOpen) return null;
 
   return (
-    <Container>
-      {isModalOpen && (
-        <ModalForm
-          inputList={inputList}
-          btnAction="Cadastrar"
-          legendLink="Já tem uma conta?"
-          linkRedirect="Fazer login"
-          onClose={closeModal}
-        />
-      )}
-    </Container>
+    <>
+      <Blur />
+      <Container>
+        <ModalContainer>
+          <FormContainer>
+            <CloseModal onClick={closeModals}>X</CloseModal>
+            <h2>Crie sua conta</h2>
+            <p>Insira seus dados para completar o cadastro.</p>
+            <Form>
+              {inputList.map((input, index) => (
+                <InputForm key={index} {...input} />
+              ))}
+              <SendButton>Cadastrar</SendButton>
+              <p>
+                Já tem uma conta?{" "}
+                <CriarConta onClick={openLogin}>Fazer login</CriarConta>
+              </p>
+            </Form>
+          </FormContainer>
+        </ModalContainer>
+      </Container>
+    </>
   );
 };
