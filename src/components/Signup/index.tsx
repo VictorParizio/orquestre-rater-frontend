@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import {
   Blur,
   CloseModal,
@@ -11,6 +11,12 @@ import {
 } from "../../styles/ModalForm";
 import { InputForm } from "../InputForm";
 import { useModalStore } from "src/store/modalStore";
+import { postAPI } from "src/http";
+import { validateInput } from "src/util/schemaValidate";
+
+interface ApiResponse {
+  token: string;
+}
 
 export const Signup: React.FC = () => {
   const { isSignupOpen, openLogin, closeModals } = useModalStore();
@@ -67,6 +73,38 @@ export const Signup: React.FC = () => {
 
   if (!isSignupOpen) return null;
 
+  const { fullName, email, password } = formData;
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      console.log("A senha e a confirmação da senha devem ser iguais.");
+    }
+
+    const submissionData = { fullName, email, password };
+
+    try {
+      validateInput(submissionData);
+
+      const response = (await postAPI(
+        "user/register",
+        submissionData
+      )) as ApiResponse;
+      console.log(response);
+      sessionStorage.setItem("token", response.token);
+      closeModals();
+      setFormData({
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error: unknown) {
+      console.log("Erro interno do servidor ", error);
+    }
+  };
+
   return (
     <>
       <Blur />
@@ -76,7 +114,7 @@ export const Signup: React.FC = () => {
             <CloseModal onClick={closeModals}>X</CloseModal>
             <h2>Crie sua conta</h2>
             <p>Insira seus dados para completar o cadastro.</p>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               {inputList.map((input, index) => (
                 <InputForm key={index} {...input} />
               ))}
