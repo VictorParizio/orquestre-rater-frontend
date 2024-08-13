@@ -39,6 +39,7 @@ type InputProps = {
   placeholder: string;
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 };
 
 export const InputForm: React.FC<InputProps> = ({
@@ -48,6 +49,7 @@ export const InputForm: React.FC<InputProps> = ({
   placeholder,
   value,
   onChange,
+  disabled = false,
 }) => {
   return (
     <Container>
@@ -61,6 +63,7 @@ export const InputForm: React.FC<InputProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
     </Container>
   );
