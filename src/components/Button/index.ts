@@ -16,6 +16,10 @@ export const Button = styled.button`
 export const ButtonLight = styled(Button)`
   background: ${colors.secondaryText};
   color: ${colors.primaryBackground};
+  
+  &:hover {
+    filter: none;
+  }
 `;
 
 export const ButtonDark = styled(Button)`
