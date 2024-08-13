@@ -3,6 +3,7 @@ import { Carousel } from "../Carousel";
 import { ButtonMedium } from "../Button";
 import { LuClapperboard } from "react-icons/lu";
 import { colors } from "src/theme/colors";
+import { useModalStore } from "src/store/modalStore";
 
 const Empyt = styled.div`
   height: 20.4rem;
@@ -32,6 +33,8 @@ const Login = styled(ButtonMedium)`
 `;
 
 export const WatchCarousel = () => {
+  const { openLogin } = useModalStore();
+
   return (
     <Carousel title="Filmes assistidos">
       <Empyt>
@@ -40,7 +43,7 @@ export const WatchCarousel = () => {
           <h3>Ops, nenhum filme avaliado ainda.</h3>
           <p>Que tal adicionar um?</p>
         </div>
-        <Login>Fazer login</Login>
+        <Login onClick={openLogin}>Fazer login</Login>
       </Empyt>
     </Carousel>
   );
