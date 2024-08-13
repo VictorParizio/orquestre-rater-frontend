@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { InputForm } from "../InputForm";
 import {
   Blur,
@@ -11,6 +11,11 @@ import {
   SendButton,
 } from "../../styles/ModalForm";
 import { useModalStore } from "src/store/modalStore";
+import { postAPI } from "src/http";
+
+interface ApiResponse {
+  token: string;
+}
 
 export const Login: React.FC = () => {
   const { isLoginOpen, openSignup, closeModals } = useModalStore();
@@ -49,6 +54,23 @@ export const Login: React.FC = () => {
 
   if (!isLoginOpen) return null;
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = (await postAPI("user/session", formData)) as ApiResponse;
+      console.log(response);
+      sessionStorage.setItem("token", response.token);
+      closeModals();
+      setFormData({
+        email: "",
+        password: "",
+      });
+    } catch (error: unknown) {
+      console.log("Erro interno do servidor ", error);
+    }
+  };
+
   return (
     <>
       <Blur />
@@ -58,7 +80,7 @@ export const Login: React.FC = () => {
             <CloseModal onClick={closeModals}>X</CloseModal>
             <h2>Acesse sua conta</h2>
             <p>Bem vindo de volta! Entre com seus dados.</p>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               {inputList.map((input, index) => (
                 <InputForm key={index} {...input} />
               ))}
