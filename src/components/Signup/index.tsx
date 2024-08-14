@@ -11,12 +11,12 @@ import {
 } from "../../styles/ModalForm";
 import { InputForm } from "../InputForm";
 import { useModalStore } from "src/store/modalStore";
-import { postAPI } from "src/http";
 import {
   validateSignup,
   ValidationErrors,
 } from "src/util/schemaValidateSignup";
 import { useUserStore } from "src/store/userStore";
+import { postAPI } from "src/http/users";
 
 interface ApiResponse {
   token: string;

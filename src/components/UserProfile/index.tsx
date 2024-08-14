@@ -11,8 +11,8 @@ import {
   UpdateField,
 } from "./style";
 import { ModalDeleteUser } from "./ModalDeleteUser";
-import { updateByIdAPI } from "src/http";
 import { useUserStore } from "src/store/userStore";
+import { updateByIdAPI } from "src/http/users";
 
 interface ApiResponse {
   updatedUser: {

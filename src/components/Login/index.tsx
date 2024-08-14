@@ -11,9 +11,9 @@ import {
   SendButton,
 } from "../../styles/ModalForm";
 import { useModalStore } from "src/store/modalStore";
-import { postAPI } from "src/http";
 import { useUserStore } from "src/store/userStore";
 import { validateLogin, ValidationErrors } from "src/util/schemaValidateLogin";
+import { postAPI } from "src/http/users";
 
 interface ApiResponse {
   token: string;

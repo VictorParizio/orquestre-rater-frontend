@@ -3,10 +3,10 @@ import { FormContainer } from "./style";
 import styled from "styled-components";
 import { ButtonDark, ButtonLight } from "../Button";
 import { useModalStore } from "src/store/modalStore";
-import { deleteByIdAPI } from "src/http";
 import { useUserStore } from "src/store/userStore";
 import { FormEvent } from "react";
 import { colors } from "src/theme/colors";
+import { deleteByIdAPI } from "src/http/users";
 
 const Blur = styled.div`
   height: 100%;
