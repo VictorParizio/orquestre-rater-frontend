@@ -27,16 +27,58 @@ export const Container = styled.section`
     width: 35.2rem;
     margin: 2.4rem 0;
     font-size: 1.4rem;
-    color: ${colors.tertiaryText}
+    color: ${colors.tertiaryText};
+  }
+
+  @media (max-width: 450px) {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: auto;
+  }
+`;
+
+export const FormContainer = styled.div`
+  background: ${colors.primaryBackground};
+  margin: 0 auto;
+  padding: 2.4rem;
+  border: 3px solid ${colors.primaryInteractive};
+  border-radius: 2.4rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+    header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      color: ${colors.secondaryText};
+    }
+
+    p {
+      font-size: 1.4rem;
+      color: ${colors.tertiaryText};
+    }
+  }
+
+  @media (max-width: 450px) {
+    border-radius: 2.4rem 2.4rem 0 0;
   }
 `;
 
 export const BtnCancel = styled(ButtonDark)`
   width: 17rem;
   height: 4.8rem;
-  margin-right: 1.2rem;
   font-size: 1.6rem;
   font-weight: 500;
+  margin-right: 1.2rem;
 `;
 
 export const BtnConfirm = styled(ButtonLight)`

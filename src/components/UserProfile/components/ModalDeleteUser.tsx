@@ -1,10 +1,9 @@
 import { ModalContainer } from "src/styles/ModalForm";
-import { FormContainer } from "../style";
 import { useModalStore } from "src/store/modalStore";
 import { useUserStore } from "src/store/userStore";
 import { FormEvent } from "react";
 import { deleteByIdAPI } from "src/http/users";
-import { Blur, BtnCancel, BtnConfirm, Container } from "./style";
+import { Blur, BtnCancel, BtnConfirm, Container, FormContainer } from "./style";
 
 export const ModalDeleteUser = () => {
   const { isDeleteUser, closeModals, closeModalConfirm } = useModalStore();

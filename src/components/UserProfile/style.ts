@@ -41,7 +41,32 @@ export const FormContainer = styled.div`
 
     input {
       width: 37rem;
+      max-width: 36vw;
     }
+  }
+
+  @media (max-width: 864px) {
+    width: 80rem;
+    max-width: 80vw;
+    form {
+      gap: 1.2rem;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      div > h3 {
+        font-size: 1.8rem;
+      }
+
+      h3 + p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  @media (max-width: 450px) {
+    border-radius: 2.4rem 2.4rem 0 0;
   }
 `;
 
@@ -58,14 +83,25 @@ export const UpdateField = styled.div`
   display: flex;
   gap: 12px;
 
-  input {
-    width: 37rem;
+  @media (max-width: 678px) {
+    flex-direction: column;
+    gap: 0;
+
+    label + input {
+      max-width: 100%;
+    }
   }
 `;
 
 export const FieldEmail = styled.div`
   input::placeholder {
     color: ${colors.primarySolid};
+  }
+
+  @media (max-width: 678px) {
+    label + input {
+      max-width: 100%;
+    }
   }
 `;
 
@@ -86,4 +122,12 @@ export const SaveUpdate = styled(ButtonLight)`
   font-size: 1.6rem;
   font-weight: 500;
   margin-left: auto;
+
+  @media (max-width: 678px) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 567px) {
+    width: 100%;
+  }
 `;

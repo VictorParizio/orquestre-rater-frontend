@@ -4,6 +4,12 @@ import { colors } from "src/theme/colors";
 
 export const AccordionContainer = styled.div`
   position: relative;
+
+  @media(max-width: 578px){
+    position: absolute;
+    top: 2.4rem;
+    right: 1.2rem;
+  }
 `;
 
 export const Container = styled.div`
