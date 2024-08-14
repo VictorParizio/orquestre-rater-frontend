@@ -59,10 +59,6 @@ export const Form = styled.form`
   gap: 2.4rem;
   width: 38.1rem;
   margin-top: 2.4rem;
-
-  p {
-    color: ${colors.tertiaryText};
-  }
 `;
 
 export const SendButton = styled(ButtonDark)`

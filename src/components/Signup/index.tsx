@@ -12,14 +12,27 @@ import {
 import { InputForm } from "../InputForm";
 import { useModalStore } from "src/store/modalStore";
 import { postAPI } from "src/http";
-import { validateInput } from "src/util/schemaValidate";
+import {
+  validateSignup,
+  ValidationErrors,
+} from "src/util/schemaValidateSignup";
+import { useUserStore } from "src/store/userStore";
 
 interface ApiResponse {
   token: string;
+  newUser: {
+    id: string;
+    fullName: string;
+    userName: string;
+    email: string;
+  };
 }
 
 export const Signup: React.FC = () => {
   const { isSignupOpen, openLogin, closeModals } = useModalStore();
+  const { setToken, setUserData } = useUserStore();
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<ValidationErrors>({});
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -34,6 +47,10 @@ export const Signup: React.FC = () => {
       ...prevData,
       [name]: value,
     }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: undefined,
+    }));
   };
 
   const inputList = [
@@ -44,6 +61,7 @@ export const Signup: React.FC = () => {
       placeholder: "Digite seu nome",
       value: formData.fullName,
       onChange: handleChange,
+      errorMessage: errors.fullName,
     },
     {
       textLabel: "E-mail",
@@ -52,6 +70,7 @@ export const Signup: React.FC = () => {
       placeholder: "Digite seu e-mail",
       value: formData.email,
       onChange: handleChange,
+      errorMessage: errors.email,
     },
     {
       textLabel: "Senha",
@@ -60,6 +79,7 @@ export const Signup: React.FC = () => {
       placeholder: "Digite sua senha",
       value: formData.password,
       onChange: handleChange,
+      errorMessage: errors.password,
     },
     {
       textLabel: "Confirmar senha",
@@ -68,31 +88,38 @@ export const Signup: React.FC = () => {
       placeholder: "Confirme sua senha",
       value: formData.confirmPassword,
       onChange: handleChange,
+      errorMessage: errors.confirmPassword,
     },
   ];
 
   if (!isSignupOpen) return null;
 
-  const { fullName, email, password } = formData;
-
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
+    const validationErrors = validateSignup(formData);
 
-    if (formData.password !== formData.confirmPassword) {
-      console.log("A senha e a confirmação da senha devem ser iguais.");
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setLoading(false);
+      return;
     }
 
-    const submissionData = { fullName, email, password };
+    const submissionData = {
+      fullName: formData.fullName,
+      email: formData.email,
+      password: formData.password,
+    };
 
     try {
-      validateInput(submissionData);
-
       const response = (await postAPI(
         "user/register",
         submissionData
       )) as ApiResponse;
-      console.log(response);
+
       sessionStorage.setItem("token", response.token);
+      setToken(response.token);
+      setUserData(response.newUser);
       closeModals();
       setFormData({
         fullName: "",
@@ -100,8 +127,10 @@ export const Signup: React.FC = () => {
         password: "",
         confirmPassword: "",
       });
-    } catch (error: unknown) {
-      console.log("Erro interno do servidor ", error);
+    } catch (error) {
+      console.error("Erro ao cadastrar usuário:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -114,11 +143,13 @@ export const Signup: React.FC = () => {
             <CloseModal onClick={closeModals}>X</CloseModal>
             <h2>Crie sua conta</h2>
             <p>Insira seus dados para completar o cadastro.</p>
-            <Form onSubmit={handleSubmit}>
+            
+            <Form onSubmit={handleSubmit} noValidate>
               {inputList.map((input, index) => (
                 <InputForm key={index} {...input} />
               ))}
-              <SendButton>Cadastrar</SendButton>
+              <SendButton>{loading ? "Enviando..." : "Cadastrar"}</SendButton>
+
               <p>
                 Já tem uma conta?{" "}
                 <CriarConta onClick={openLogin}>Fazer login</CriarConta>

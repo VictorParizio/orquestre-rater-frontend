@@ -4,6 +4,12 @@ import { colors } from "src/theme/colors";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  input + p {
+    color: red;
+    text-align: left;
+    margin-bottom: -1.6rem;
+  }
 `;
 
 const Label = styled.label`
@@ -40,6 +46,7 @@ type InputProps = {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  errorMessage?: string;
 };
 
 export const InputForm: React.FC<InputProps> = ({
@@ -50,6 +57,7 @@ export const InputForm: React.FC<InputProps> = ({
   value,
   onChange,
   disabled = false,
+  errorMessage,
 }) => {
   return (
     <Container>
@@ -65,6 +73,7 @@ export const InputForm: React.FC<InputProps> = ({
         onChange={onChange}
         disabled={disabled}
       />
+      {errorMessage && <p>{errorMessage}</p>}
     </Container>
   );
 };
