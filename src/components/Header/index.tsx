@@ -5,6 +5,8 @@ import { colors } from "src/theme/colors";
 import { Search } from "./components/Search";
 import { ButtonDark } from "../Button";
 import { useModalStore } from "src/store/modalStore";
+import { useUserStore } from "src/store/userStore";
+import { AccordionProfile } from "../AccordionProfile";
 
 const HeaderContainer = styled.header`
   background-color: ${colors.primaryBackground};
@@ -22,13 +24,18 @@ const HeaderContainer = styled.header`
 `;
 
 export const Header = () => {
-  const openLogin = useModalStore((state) => state.openLogin);
+  const { openLogin } = useModalStore();
+  const { userData } = useUserStore();
 
   return (
     <HeaderContainer>
       <img src={logo} alt="Logo da Ratio" />
       <Search />
-      <ButtonDark onClick={openLogin}>Login</ButtonDark>
+      {userData ? (
+        <AccordionProfile></AccordionProfile>
+      ) : (
+        <ButtonDark onClick={openLogin}>Login</ButtonDark>
+      )}
     </HeaderContainer>
   );
 };

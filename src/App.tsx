@@ -4,7 +4,7 @@ import { Home } from "./pages/Home";
 import { Footer } from "./components/Footer";
 import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
-import { UpdateUser } from "./components/UpdateUser";
+import { UserProfile } from "./components/UserProfile";
 
 export const App = () => {
   return (
@@ -15,7 +15,7 @@ export const App = () => {
       <Footer />
       <Login />
       <Signup />
-      <UpdateUser />
+      <UserProfile />
     </>
   );
 };
