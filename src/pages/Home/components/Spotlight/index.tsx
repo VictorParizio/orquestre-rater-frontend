@@ -6,8 +6,7 @@ import { ButtonMedium } from "src/components/Button";
 import { colors } from "src/theme/colors";
 import { BtnTrailer } from "src/components/BtnTrailer";
 import { Thumbnail } from "src/components/Thumbnail";
-
-import thumbnail from "@assets/thumbnail.jpg";
+import { Movie } from "../..";
 
 const SpotlightContainer = styled.figure`
   position: relative;
@@ -97,34 +96,41 @@ const Description = styled.p`
   margin-bottom: 3.6rem;
 `;
 
-export const Spotlight = () => {
+interface MoviesProps {
+  movies: Movie[];
+}
+
+export const Spotlight: React.FC<MoviesProps> = ({ movies }) => {
   return (
-    <SpotlightContainer>
-      <Thumbnail src={thumbnail} />
-      <Caption>
-        <Avaliation>
-          <LuFlame />
-          <p>Em destaque</p>
-        </Avaliation>
-        <Title>Deadpool & Wolverine</Title>
-        <InforContainer>
-          <Raters>
-            <FaStar />
-            8.2 <span>| 120mil</span>
-          </Raters>
-          <Infos>
-            <p>2h 8m</p>
-            <p>Comedy, Action, Adventure, Superhero...</p>
-            <p>2024</p>
-          </Infos>
-        </InforContainer>
-        <Description>
-          Deadpool recebe uma oferta da Autoridade de Variância Temporal para se
-          juntar ao Universo Cinematográfico Marvel, mas em vez disso recruta
-          uma variante do Wolverine para salvar seu universo da extinção.
-        </Description>
-        <BtnTrailer href="" type={"large"} />
-      </Caption>
-    </SpotlightContainer>
+    <>
+      {movies.map((movie) => (
+        <SpotlightContainer>
+          <Thumbnail
+            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          />
+          <Caption>
+            <Avaliation>
+              <LuFlame />
+              <p>Em destaque</p>
+            </Avaliation>
+            <Title>{movie.title}</Title>
+            <InforContainer>
+              <Raters>
+                <FaStar />
+                {movie.vote_average.toFixed(1)}{" "}
+                <span>| {Math.round(movie.popularity / 1000)} {""} mi </span>
+              </Raters>
+              <Infos>
+                <p>2h 8m</p>
+                <p>Comedy, Action, Adventure, Superhero...</p>
+                <p>{movie.release_date.split("-")[0]}</p>
+              </Infos>
+            </InforContainer>
+            <Description>{movie.overview}</Description>
+            <BtnTrailer href="" type={"large"} />
+          </Caption>
+        </SpotlightContainer>
+      ))}
+    </>
   );
 };

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import thumbnail from "@assets/thumbnail.jpg";
 
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
@@ -92,24 +91,30 @@ const Favorite = styled(ButtonMedium)`
   }
 `;
 
-export const MovieCard = () => {
+interface MovieCardProps {
+  backdrop_path: string;
+  title: string;
+  vote_average: string;
+}
+
+export const MovieCard: React.FC<MovieCardProps> = ({ backdrop_path, title, vote_average }) => {
   return (
     <ListItem>
       <Card>
-        <Thumbnail src={thumbnail} />
+        <Thumbnail src={`https://image.tmdb.org/t/p/original${backdrop_path}`} />
         <Overlay />
         <figcaption>
           <RaterInfo>
             <Raters>
               <FaStar />
-              <p>7.8</p>
+              <p>{vote_average}</p> 
             </Raters>
             <Favorite>
               <CiStar />
             </Favorite>
           </RaterInfo>
           <div>
-            <h3>Divertidamente 2</h3>
+            <h3>{title}</h3>
             <BtnTrailer href="" />
           </div>
         </figcaption>
@@ -117,3 +122,4 @@ export const MovieCard = () => {
     </ListItem>
   );
 };
+
