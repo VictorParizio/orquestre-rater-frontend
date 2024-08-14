@@ -9,37 +9,39 @@ export const FormContainer = styled.div`
   border: 3px solid ${colors.primaryInteractive};
   border-radius: 2.4rem;
 
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-
-  header {
+  form {
     display: flex;
-    justify-content: space-between;
-  }
+    flex-direction: column;
+    gap: 2.4rem;
 
-  h2 {
-    font-size: 2.4rem;
-    color: ${colors.secondaryText};
-  }
+    header {
+      display: flex;
+      justify-content: space-between;
+    }
 
-  h3 {
-    font-size: 2rem;
-    margin-bottom: 4px;
-    color: ${colors.secondaryText};
-  }
+    h2 {
+      font-size: 2.4rem;
+      color: ${colors.secondaryText};
+    }
 
-  p {
-    font-size: 1.4rem;
-    color: ${colors.tertiaryText};
-  }
+    h3 {
+      font-size: 2rem;
+      margin-bottom: 4px;
+      color: ${colors.secondaryText};
+    }
 
-  label {
-    margin-top: 1.2rem;
-  }
+    p {
+      font-size: 1.4rem;
+      color: ${colors.tertiaryText};
+    }
 
-  input {
-    width: 37rem;
+    label {
+      margin-top: 1.2rem;
+    }
+
+    input {
+      width: 37rem;
+    }
   }
 `;
 

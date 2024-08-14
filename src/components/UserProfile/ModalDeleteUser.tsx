@@ -3,6 +3,10 @@ import { FormContainer } from "./style";
 import styled from "styled-components";
 import { ButtonDark, ButtonLight } from "../Button";
 import { useModalStore } from "src/store/modalStore";
+import { deleteByIdAPI } from "src/http";
+import { useUserStore } from "src/store/userStore";
+import { FormEvent } from "react";
+import { colors } from "src/theme/colors";
 
 const Blur = styled.div`
   height: 100%;
@@ -27,6 +31,9 @@ const Container = styled.section`
 
   p {
     width: 35.2rem;
+    margin: 2.4rem 0;
+    font-size: 1.4rem;
+    color: ${colors.tertiaryText}
   }
 `;
 
@@ -47,7 +54,25 @@ const BtnConfirm = styled(ButtonLight)`
 
 export const ModalDeleteUser = () => {
   const { isDeleteUser, closeModals, closeModalConfirm } = useModalStore();
+  const { userData, clearUserData } = useUserStore();
+
   if (!isDeleteUser) return null;
+
+  const handleDeleteUser = async (event: FormEvent) => {
+    event.preventDefault();
+
+    try {
+      await deleteByIdAPI("user", userData!.id);
+      closeModals();
+      clearUserData();
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message || "Ocorreu um erro ao atualizar os dados.");
+      } else {
+        console.log("Ocorreu um erro desconhecido.");
+      }
+    }
+  };
 
   return (
     <>
@@ -63,7 +88,7 @@ export const ModalDeleteUser = () => {
             </p>
             <div>
               <BtnCancel onClick={closeModalConfirm}>Cancelar</BtnCancel>
-              <BtnConfirm onClick={closeModals}>Confirmar</BtnConfirm>
+              <BtnConfirm onClick={handleDeleteUser}>Confirmar</BtnConfirm>
             </div>
           </FormContainer>
         </ModalContainer>
