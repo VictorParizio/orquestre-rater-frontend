@@ -7,6 +7,8 @@ import { useModalStore } from "src/store/modalStore";
 
 const Empyt = styled.div`
   height: 20.4rem;
+  width: 100vw;
+  max-width: 100%;
   margin: 0 auto;
 
   display: flex;

@@ -1,17 +1,16 @@
 import styled from "styled-components";
-import thumbnail from "@assets/thumbnail.jpg";
 
 import { Thumbnail } from "src/components/Thumbnail";
 import { colors } from "src/theme/colors";
+import { People } from "../PeopleCarousel";
 
 const ListItem = styled.li`
   display: flex;
-  flex: 1;
-  min-width: 20rem;
+  width: 16rem;
 `;
 
 const Card = styled.figure`
-  width: 100%;
+  width: 16rem;
   height: 25.4rem;
   position: relative;
 
@@ -37,14 +36,13 @@ const Card = styled.figure`
   }
 `;
 
-export const PeopleCard = () => {
+export const PeopleCard: React.FC<People> = ({ profile_path, name }) => {
   return (
     <ListItem>
       <Card>
-        <Thumbnail src={thumbnail} />
+        <Thumbnail src={`https://image.tmdb.org/t/p/original${profile_path}`} />
         <figcaption>
-          <h3>Celebridade</h3>
-          <p>35</p>
+          <h3>{name}</h3>
         </figcaption>
       </Card>
     </ListItem>
