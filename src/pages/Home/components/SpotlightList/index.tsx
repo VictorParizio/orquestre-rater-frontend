@@ -10,6 +10,10 @@ const Container = styled.section`
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    @media (max-width: 1060px) {
+      flex-direction: row;
+    }
   }
 `;
 
@@ -24,7 +28,7 @@ export const SpotlightList: React.FC<SpotlightListProps> = ({ movies }) => {
       <ul>
         {movies.map((movie) => (
           <MovieCard
-            key={movie.id} 
+            key={movie.id}
             backdrop_path={movie.backdrop_path}
             title={movie.title}
             vote_average={movie.vote_average.toFixed(1)}

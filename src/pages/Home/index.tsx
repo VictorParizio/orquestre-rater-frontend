@@ -16,6 +16,10 @@ const SpotlightContainer = styled.div`
   display: flex;
   gap: 12px;
   padding: 0 2.4rem 2.4rem 2.4rem;
+
+  @media (max-width: 1060px) {
+    flex-direction: column;
+  }
 `;
 
 export interface Movie {

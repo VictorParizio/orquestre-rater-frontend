@@ -30,6 +30,17 @@ const WatchTrailer = styled.a<WatchTrailerProps>`
   &:hover {
     box-shadow: 0 0 10px ${colors.secondaryText};
   }
+
+  @media (max-width: 673px) {
+    border-radius: 40px;
+    height: 2.7rem;
+    width: 14rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    svg {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 type BtnTrailerProps = {

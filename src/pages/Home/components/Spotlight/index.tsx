@@ -32,23 +32,25 @@ export const Spotlight: React.FC<MoviesProps> = ({ movies }) => {
               <LuFlame />
               <p>Em destaque</p>
             </Avaliation>
-            <Title>{movie.title}</Title>
-            <InforContainer>
-              <Raters>
-                <FaStar />
-                {movie.vote_average.toFixed(1)}{" "}
-                <span>
-                  | {Math.round(movie.popularity / 1000)} {""} mi{" "}
-                </span>
-              </Raters>
-              <Infos>
-                <p>2h 8m</p>
-                <p>Comedy, Action, Adventure, Superhero...</p>
-                <p>{movie.release_date.split("-")[0]}</p>
-              </Infos>
-            </InforContainer>
-            <Description>{movie.overview}</Description>
-            <BtnTrailer href="" type={"large"} />
+            <div>
+              <Title>{movie.title}</Title>
+              <InforContainer>
+                <Raters>
+                  <FaStar />
+                  {movie.vote_average.toFixed(1)}{" "}
+                  <span>
+                    | {Math.round(movie.popularity / 1000)} {""} mi{" "}
+                  </span>
+                </Raters>
+                <Infos>
+                  <p>2h 8m</p>
+                  <p>{movie.release_date.split("-")[0]}</p>
+                  <p>Comedy, Action, Adventure, Superhero...</p>
+                </Infos>
+              </InforContainer>
+              <Description>{movie.overview}</Description>
+              <BtnTrailer href="" type={"large"} />
+            </div>
           </Caption>
         </SpotlightContainer>
       ))}
