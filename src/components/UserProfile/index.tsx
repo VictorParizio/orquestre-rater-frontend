@@ -10,7 +10,7 @@ import {
   SaveUpdate,
   UpdateField,
 } from "./style";
-import { ModalDeleteUser } from "./ModalDeleteUser";
+import { ModalDeleteUser } from "./components/ModalDeleteUser";
 import { useUserStore } from "src/store/userStore";
 import { updateByIdAPI } from "src/http/users";
 
