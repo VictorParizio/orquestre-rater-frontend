@@ -7,12 +7,23 @@ import { colors } from "src/theme/colors";
 import { Input } from "src/components/Input";
 
 const SearchContainer = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: center;
   gap: 1.2rem;
+  flex-grow: 1;
+
+  @media (max-width: 578px) {
+    margin-top: 1.6rem;
+  }
 `;
 
 const SearchForm = styled.form`
   position: relative;
+  
+  @media (max-width: 578px) {
+    flex-grow: 1;
+  }
 `;
 
 const BtnSearch = styled(Button)`

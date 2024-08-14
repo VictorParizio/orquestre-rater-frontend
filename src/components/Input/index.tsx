@@ -3,16 +3,23 @@ import styled from "styled-components";
 
 const BaselInput = styled.input`
   background: ${colors.secondaryBackground};
-  width: 31.7rem;
   height: 4.8rem;
+  width: 31.7rem;
   padding: 0 2rem 0 5.2rem;
-  max-width: 100%;
   border: none;
   border-radius: 2.4rem;
   color: ${colors.primaryText};
 
   &::placeholder {
     color: ${colors.tertiaryInteractive};
+  }
+
+  @media (max-width: 678px) {
+    width: 100%;
+  }
+
+  @media (max-width: 578px) {
+    max-width: 50rem;
   }
 `;
 
